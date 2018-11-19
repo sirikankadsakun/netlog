@@ -18,13 +18,15 @@ export class LoginComponent implements OnInit {
   constructor(private usersService: UsersService, private router: Router) { }
 
    ngOnInit() {
+     sessionStorage.clear();
      $('.alert').hide('');
   }
   async usersLogin(){
     if (this.username != '' && this.password != ''){
       this.users = await this.usersService.login(this.username,this.password);
+      
     if(this.users != false){
-
+///ตัวแปรsessionStorage
       sessionStorage.setItem('loginuser',JSON.stringify(this.users));
       if(this.users.users_status == 'admin')
       this.router.navigate(['admin']);

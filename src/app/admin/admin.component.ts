@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
-
-  constructor() { }
+ 
+  constructor(private router :Router) { }
 
   ngOnInit() {
+    let loginuser: any =  JSON.parse(sessionStorage.getItem('loginuser')) || {users_status:''};
+    //console.log(loginuser.users_status);
+  if(loginuser.users_name != 'admin')
+    this.router.navigate(['/login'])
   }
 
 }

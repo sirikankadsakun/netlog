@@ -4,12 +4,10 @@ import axios from 'axios';
   providedIn: 'root'
 })
 export class UsersService {
-
+   apiurl ='http://localhost/netlogapi/users.php';
   constructor() { }
-
  async login(username,password){
-    let apiurl ='http://localhost/netlogapi/users.php';
-    let result= await axios.post(apiurl,{
+    let result= await axios.post(this.apiurl,{
       Apikey: 'NetLogApi',
       fn: 'Login',
       users_name: username,
@@ -19,4 +17,17 @@ export class UsersService {
 
     
   }
+
+  async getAllUsers(){
+    let result= await axios.post(this.apiurl,{
+      Apikey: 'NetLogApi',
+      fn: 'SelectAll',
+    });
+   
+    return result.data;
+
+    
+  }
+
+
 }
