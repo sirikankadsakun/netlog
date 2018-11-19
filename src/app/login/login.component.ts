@@ -12,7 +12,7 @@ declare var $ :any;
 export class LoginComponent implements OnInit {
   username = '';
   password = '';
-  users = {};
+  users : any;
   error_txt = '';
 
   constructor(private usersService: UsersService, private router: Router) { }
