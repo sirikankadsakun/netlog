@@ -7,6 +7,14 @@ import { UsersService} from '../users.service';
 })
 export class UsersComponent implements OnInit {
   users: any;
+  newuser ={
+    users_name: '',
+    users_password: '',
+    users_status: '',
+    users_fullname: '',
+    users_Phone: '',
+    users_email: ''
+  }
 
   constructor(private usersService: UsersService) { }
 
@@ -19,4 +27,8 @@ export class UsersComponent implements OnInit {
     this.users= await this.usersService.getAllUsers();
 
   }
+  addUser(){
+    console.log(this.newuser);
+  }
+
 }
