@@ -1,100 +1,196 @@
-<button type="button" class="btn btn-success m-3" data-toggle="modal" data-target="#adduserModal">
- <i class="fas fa-plus circle fa-lg"></i> Add
-</button>
-<table class="table table-hover table-dark " >
-    <thead>
-      <tr>
-        <th >User_Name</th>
-        <th >User_Password</th>
-        <th >User_Status</th>
-        <th >User_fullname</th>
-        <th >Edit</th>
-        <th >Delete</th>
-      </tr>
-    </thead>
-    <tbody>
-  
-      <tr *ngFor="let user of users">
-        <td>{{ user.users_name}}</td>
-        <td class="text-cemter"> {{ user.users_status}}</td>
-        <td>{{ user.users_fullname}}</td>
-        <td class="text-cemter"> {{ user.users_status}}</td>
-        <td class="text-cemter">
-          <i class="fas fa-edit text-warning"></i></td>
-        <td class="text-cemter">
-          <i class="fas fa-trash text-danger"></i></td>
-      </tr>
-    </tbody>
-  </table>
+<button type="button" class="btn btn-success m-3" data-toggle="modal" data-target="#adduserModal"><i class="fas fa-plus-circle fa-lg"></i>
+  Add</button>
+  <table class="table table-hover table-dark " >
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Status</th>
+      <th>Fullname</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{ user.users_name }}</td>
+      <td class="text-center">{{ user.users_status }}</td>
+      <td> {{ user.users_fullname }}</td>
+      <td class="text-center">
+      <button class="btn btn-dark" data-toggle="modal" data-target="#edituserModal" (click)="editUserM(user)"> 
+        <i class="fas fa-edit text-warning"></i></button></td>
+      <td class="text-center">
+        <button class="btn btn-dark"  data-toggle="modal" data-target="#deleteuserModal" (click)="deleteUserM(user)">
+        <i class="fas fa-trash text-danger"></i></button></td>
 
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="adduserModal">
+    </tr>
+  </tbody>
+</table>
+
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"
+  id="adduserModal">
+
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
+        <h5 class="modal-title">Insert new user</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body col-md-9 col-12 ml-5">
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <div class="input-group-text">
               <i class="fas fa-user"></i>
             </div>
           </div>
-          <input type="text" id="users_name" name="users_name" placeholder="Username" class="form-control" [(ngModel)]="newuser.user_username">
+          <input type="text" id="users_name" name="users_name" placeholder="Username" class="form-control" [(ngModel)]="newuser.users_name">
         </div>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <div class="input-group-text">
-              <i class="fas fa-user"></i>
+              <i class="fas fa-key"></i>
             </div>
           </div>
-          <input type="password" id="users_password" name="users_password" placeholder="Password" class="form-control" [(ngModel)]="newuser.user_password">
+          <input type="password" id="users_password" name="users_password" placeholder="Password" class="form-control" [(ngModel)]="newuser.users_password">
         </div>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <div class="input-group-text">
-              <i class="fas fa-user"></i>
+              <i class="fas fa-id-card"></i>
             </div>
           </div>
-          <input type="text" id="users_fullname" name="users_fullname" placeholder="Firstname Lastname" class="form-control" [(ngModel)]="newuser.user_fullname">
+          <input type="text" id="users_fullname" name="users_fullname" placeholder="Firstname Lastname" class="form-control" [(ngModel)]="newuser.users_fullname">
+        </div>
+        <div class="input-group mb-3 ">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <i class="fas fa-mobile-alt"></i>
+            </div>
+          </div>
+          <input type="text" id="users_phone" name="users_phone" placeholder="Phone number" class="form-control" [(ngModel)]="newuser.users_phone">
         </div>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <div class="input-group-text">
-              <i class="fas fa-user"></i>
+              <i class="fas fa-envelope-open"></i>
             </div>
           </div>
-          <input type="text" id="users_phone" name="users_phone" placeholder="Phone number" class="form-control" [(ngModel)]="newuser.user_phone">
+          <input type="text" id="users_email" name="users_email" placeholder="Email address" class="form-control" [(ngModel)]="newuser.users_email">
         </div>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <div class="input-group-text">
-              <i class="fas fa-user"></i>
+              <i class="fas fa-cloud-moon"></i>
             </div>
           </div>
-          <input type="text" id="users_email" name="users_email" placeholder="Email address" class="form-control" [(ngModel)]="newuser.user_email">
+          <select class="form-control" [(ngModel)]="newuser.users_status"> 
+              <option>Admin</option>
+              <option>User</option>
+          </select>
         </div>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <div class="input-group-text">
-              <i class="fas fa-user"></i>
-            </div>
-          </div>
-
-    <select class="form-control" [(ngModel)]="newuser.user_status">
-      <option>Admin</option>
-      <option>user</option>
-    </select>
       </div>
-    </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success" (click)="addUser()">Save</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success" (click)="addUser()" data-dismiss="modal">Save</button>
       </div>
-
     </div>
   </div>
-</div>
+</div> <!--End insert modal-->
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"
+  id="edituserModal">
+
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit user</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body col-md-9 col-12 ml-5">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <i class="fas fa-user"></i>
+            </div>
+          </div>
+          <input type="text" id="editusers_name" name="editusers_name" placeholder="Username" class="form-control" [(ngModel)]="edituser.users_name">
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <i class="fas fa-key"></i>
+            </div>
+          </div>
+          <input type="password" id="editusers_password" name="editusers_password" placeholder="Password" class="form-control" [(ngModel)]="edituser.users_password">
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <i class="fas fa-id-card"></i>
+            </div>
+          </div>
+          <input type="text" id="editusers_fullname" name="editusers_fullname" placeholder="Firstname Lastname" class="form-control" [(ngModel)]="edituser.users_fullname">
+        </div>
+        <div class="input-group mb-3 ">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <i class="fas fa-mobile-alt"></i>
+            </div>
+          </div>
+          <input type="text" id="editusers_phone" name="editusers_phone" placeholder="Phone number" class="form-control" [(ngModel)]="edituser.users_phone">
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <i class="fas fa-envelope-open"></i>
+            </div>
+          </div>
+          <input type="text" id="editusers_email" name="editusers_email" placeholder="Email address" class="form-control" [(ngModel)]="edituser.users_email">
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <i class="fas fa-cloud-moon"></i>
+            </div>
+          </div>
+          <select class="form-control" [(ngModel)]="edituser.users_status"> 
+              <option>Admin</option>
+              <option>User</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-warning" (click)="editUser()" data-dismiss="modal">Edit</button>
+      </div>
+    </div>
+  </div>
+</div> <!--End edit user modal -->
+
+<div class="modal fade " tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="deleteuserModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title text-danger">delete user</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+        <div class="modal-body">
+            <h3> Are you sure to delete this user ?</h3>
+            <h4> Username: {{deleteuser.users_name}}</h4>
+            <h4> Fullname: {{deleteuser.users_fullname}}</h4>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-danger" (click)="deleteUser()" data-dismiss="modal">Delete</button>
+          </div>
+
+      </div>
+    </div>
+  </div>
+  

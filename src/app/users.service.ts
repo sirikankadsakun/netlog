@@ -14,7 +14,6 @@ export class UsersService {
       users_password: password
     });
     return result.data;
-
     
   }
 
@@ -24,10 +23,24 @@ export class UsersService {
       fn: 'SelectAll',
     });
    
-    return result.data;
+    return result.data; 
+  }
 
+  async insertUser(newuser){
+    newuser.Apikey= 'NetLogApi'
+    newuser.fn = 'Insert';
+   ///console.log(newuser);
+    let result = await axios.post(this.apiurl,newuser);
+    return result.data;
     
   }
 
-
+  async updateUser(edituser){
+    edituser.Apikey= 'NetLogApi'
+    edituser.fn = 'Update';
+   console.log(edituser);
+    let result = await axios.post(this.apiurl,edituser);
+    return result.data;
+    
+  }
 }

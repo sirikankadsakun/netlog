@@ -24,22 +24,27 @@ export class LoginComponent implements OnInit {
   async usersLogin(){
     if (this.username != '' && this.password != ''){
       this.users = await this.usersService.login(this.username,this.password);
-      
     if(this.users != false){
 ///ตัวแปรsessionStorage
       sessionStorage.setItem('loginuser',JSON.stringify(this.users));
-      if(this.users.users_status == 'admin')
+    if(this.users.users_status == 'admin')
       this.router.navigate(['admin']);
-      else
+    else if(this.users.users_status == 'user')
       this.router.navigate(['user']);
+    else{
+      this.error_txt = 'Invalid Username or Password';
+      $('.alert').show();
+
+    }
+    
     }else{
       this.error_txt = 'Invalid Username or Password';
-      $('.alert').show('');
+      $('.alert').show();
     } 
 
     }else{
       this.error_txt = 'Please enter Username and Password';
-      $('.alert').show('');
+      $('.alert').show();
     }
     
   }

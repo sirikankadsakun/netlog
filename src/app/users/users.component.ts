@@ -7,14 +7,19 @@ import { UsersService} from '../users.service';
 })
 export class UsersComponent implements OnInit {
   users: any;
-  newuser ={
+  //edituser: any;
+  //deleteuser: any;
+  newuser = {
     users_name: '',
     users_password: '',
     users_status: '',
     users_fullname: '',
     users_Phone: '',
-    users_email: ''
+    users_email: '',
+    users_name_old: ''
   }
+  edituser = this.newuser;
+  deleteuser = this.newuser;
 
   constructor(private usersService: UsersService) { }
 
@@ -27,8 +32,42 @@ export class UsersComponent implements OnInit {
     this.users= await this.usersService.getAllUsers();
 
   }
-  addUser(){
-    console.log(this.newuser);
+  async addUser(){
+    let result = await this.usersService.insertUser
+    (this.newuser);
+    if (result== true){
+      alert('Insert Success.');
+      this.getUsers();
+    }else{
+      alert('Insert Error.!!!');
+    }
+    
   }
 
+    editUserM(user){
+      this.edituser = JSON.parse (JSON.stringify(user));
+      this.edituser.users_password = '';
+      this.edituser.users_name_old = user.users_name;
+    }
+
+
+  async editUser(){
+    if(this.edituser.users_password =='')
+      delete this.edituser.users_password;
+    let result = await this.usersService.updateUser
+    (this.edituser);
+      //console.log(result);
+    if (result== true){
+      alert('Edit user Success.');
+      this.getUsers();
+    }else{
+      alert('Edit user Error.!!!');
+    }
+
+  }
+
+
+  deleteUserM(user){
+    this.deleteuser = JSON.parse(JSON.stringify(user));
+  }
 }
